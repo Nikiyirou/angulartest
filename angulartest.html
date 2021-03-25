@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    th{
+        padding: 8px;
+        text-align: left;
+        border-bottom: 3px solid #ddd;
+    }
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    </style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<div ng-app="myapp" ngcontroller="orderByCtrl">
+<body>
+<p><input type="text" ng-model="test" placeholder="Search"></p>
+<table class="table table-border" ng-app="myapp" ng-controller="orderByCtrl" border="0" width="100%">
+    <thead>
+        <tr>
+            <th ng-click="col='productid';desc=!desc">Product ID</th>
+            <th ng-click="col='name';desc=!desc">Product Name</th>
+            <th ng-click="col='price';desc=!desc">Product Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="d in data|orderBy:col:desc|filter:test">
+            <td>{{d.productid}}</td>
+            <td>{{d.name}}</td>
+            <td>{{d.price|currency}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+   var app = angular.module('myapp', []);
+
+app.controller('orderByCtrl', function($scope) {
+    $scope.col = 'name';
+    $scope.desc = 0;
+    $scope.data = [
+        {productid:3424,name:'ipad mini',price:2200.00},
+        {productid:3333,name:'iphone',price:5400.00},
+        {productid:1212,name:'ipad air',price:2340.00},
+        {productid:980,name:'imac',price:15400.00},
+        {productid:885,name:'ipad',price:3420.00}
+        ];
+
+
+});
+</script>
+</body>
+</html>
